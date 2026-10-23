@@ -1,1 +1,169 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Receiver dashboard | Relay</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="dashboards.css"></head><body class="dashboard-page"><header class="dashboard-topbar"><a class="brand" href="index.html"><span class="brand-mark">↗</span><span>relay<span class="brand-dot">.</span></span></a><nav><a href="supplier.html">Supplier view</a><a href="rider.html">Rider view</a><a class="active" href="receiver.html">Receiver view</a></nav><div class="user-pill"><span class="avatar">HS</span> Harbor Shelter</div></header><main class="dashboard-page-main"><div class="dashboard-page-heading"><div><div class="eyebrow eyebrow-dark">Receiver workspace · Intake open</div><h1>Turn urgent need<br><em>into a clear alert.</em></h1></div><p>Define exactly what your shelter can safely receive. Relay coordinates supply and rider capacity around your deadline.</p></div><div class="role-dashboard-grid"><div class="role-metric-card"><span>Active demand</span><strong>01</strong><small>match in progress</small></div><div class="role-metric-card"><span>Meals confirmed</span><strong>120</strong><small>expected by 7:30 PM</small></div><div class="role-metric-card"><span>Intake capacity</span><strong>160</strong><small>portions remaining</small></div></div><div class="role-dashboard-layout"><section class="role-dashboard-panel"><span class="panel-caption">ACTIVE DEMAND ALERT</span><h2>Vegetarian meal service · Today</h2><div class="status-banner"><span></span> Supplier matched · Rider assignment in progress</div><div class="queue-item"><div><b>Requested</b><small>120 meal portions · vegetarian<br>Receiving window: 6:45–7:30 PM</small></div><span class="queue-badge">MATCHED</span></div><div class="queue-item"><div><b>Safety + intake</b><small>Hot-hold accepted · no nuts<br>South entrance · 4 volunteers ready</small></div><span class="queue-badge">READY</span></div><button class="button button-primary dashboard-action" style="margin-top:20px;width:100%">Create new demand alert <span>↗</span></button></section><aside class="role-dashboard-panel"><span class="panel-caption">RECEIVING CHECKLIST</span><h2>Before the rider arrives</h2><ul class="constraint-list"><li>Confirm south entrance is open</li><li>Assign a receiving volunteer</li><li>Prepare hot-hold landing area</li><li>Keep quantity count ready</li></ul><button class="button button-ghost dashboard-action" style="margin-top:22px;width:100%">Update intake window</button></aside></div><div class="role-dashboard-footer"><span>Last sync: just now · 1 alert active</span><a href="index.html">← Back to Relay overview</a></div></main></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Receiver dashboard | Relay</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="dashboards.css" />
+  </head>
+  <body class="dashboard-page">
+    <header class="dashboard-topbar">
+      <a class="brand" href="index.html"><span class="brand-mark">↗</span><span>relay<span class="brand-dot">.</span></span></a>
+      <nav><a href="supplier.html">Supplier view</a><a href="rider.html">Rider view</a><a class="active" href="receiver.html">Receiver view</a></nav>
+      <div class="user-pill"><span class="avatar">HS</span> Harbor Shelter</div>
+    </header>
+
+    <main class="dashboard-page-main">
+      <div class="dashboard-page-heading">
+        <div><div class="eyebrow eyebrow-dark">Receiver workspace · Intake open</div><h1>Turn urgent need<br /><em>into a clear alert.</em></h1></div>
+        <p>Define exactly what your shelter can safely receive. Relay coordinates supply and rider capacity around your deadline.</p>
+      </div>
+
+      <div class="role-dashboard-grid">
+        <div class="role-metric-card"><span>Active demand</span><strong id="active-demand-count">01</strong><small id="active-demand-sub">match in progress</small></div>
+        <div class="role-metric-card"><span>Meals confirmed</span><strong id="meals-confirmed-count">120</strong><small id="meals-confirmed-sub">expected by 7:30 PM</small></div>
+        <div class="role-metric-card"><span>Intake capacity</span><strong id="intake-capacity-count">160</strong><small id="intake-capacity-sub">portions remaining</small></div>
+      </div>
+
+      <div class="role-dashboard-layout">
+        <section class="role-dashboard-panel">
+          <span class="panel-caption">ACTIVE DEMAND ALERTS</span>
+          <h2 id="active-demand-heading">Vegetarian meal service · Today</h2>
+          <div class="status-banner" id="receiver-status-banner"><span></span> Supplier matched · Rider assignment in progress</div>
+          <div id="receiver-tracking-area"></div>
+          <div id="demand-alert-list"></div>
+          <button class="button button-primary dashboard-action" id="create-demand-alert" type="button" style="margin-top:20px;width:100%">Create new demand alert <span>↗</span></button>
+        </section>
+
+        <aside class="role-dashboard-panel">
+          <span class="panel-caption">RECEIVING CHECKLIST</span>
+          <h2>Before the rider arrives</h2>
+          <ul class="constraint-list" id="receiver-checklist">
+            <li id="chk-entrance">Confirm south entrance is open</li>
+            <li id="chk-staff">Assign a receiving volunteer</li>
+            <li id="chk-hot-hold">Prepare hot-hold landing area</li>
+            <li id="chk-count">Keep quantity count ready</li>
+          </ul>
+          <button class="button button-ghost dashboard-action" id="update-intake-btn" type="button" style="margin-top:22px;width:100%">Update intake window</button>
+        </aside>
+      </div>
+
+      <div class="role-dashboard-footer"><span>Last sync: just now · <span id="active-demand-footer">1 alert active</span></span><a href="index.html">← Back to Relay overview</a></div>
+    </main>
+
+    <div class="demand-modal-backdrop" id="demand-alert-modal" hidden>
+      <section class="demand-modal" role="dialog" aria-modal="true" aria-labelledby="demand-modal-title">
+        <button class="demand-modal-close" id="close-demand-alert" type="button" aria-label="Close demand alert form">×</button>
+        <div class="eyebrow eyebrow-dark">Receiver workspace · New request</div>
+        <h2 id="demand-modal-title">Create a demand<br /><em>alert.</em></h2>
+        <p class="demand-modal-intro">Give suppliers and riders the details they need to act safely before your receiving window closes.</p>
+
+        <form id="demand-alert-form" novalidate>
+          <div class="demand-form-grid">
+            <label class="demand-field full-width" for="demand-category">Demand category <span>*</span>
+              <select id="demand-category" name="category" required>
+                <option value="">Select a category</option>
+                <option>Cooked Meals</option>
+                <option>Raw Rations</option>
+                <option>Drinking Water</option>
+                <option>Medical Supplies</option>
+                <option>Infant Essentials</option>
+                <option>Clothing &amp; Blankets</option>
+                <option>Hygiene Kits</option>
+                <option>Other</option>
+              </select>
+              <small class="field-error" data-error-for="demand-category"></small>
+            </label>
+
+            <label class="demand-field full-width" id="custom-category-field" for="custom-category" hidden>Custom category <span>*</span>
+              <input id="custom-category" name="customCategory" type="text" maxlength="80" placeholder="e.g. Solar lanterns" />
+              <small class="field-error" data-error-for="custom-category"></small>
+            </label>
+
+            <label class="demand-field" for="demand-quantity">Quantity needed <span>*</span>
+              <input id="demand-quantity" name="quantity" type="number" min="1" step="1" inputmode="numeric" placeholder="e.g. 120" required />
+              <small class="field-error" data-error-for="demand-quantity"></small>
+            </label>
+
+            <label class="demand-field" for="demand-urgency">Urgency <span>*</span>
+              <select id="demand-urgency" name="urgency" required>
+                <option value="">Select urgency</option>
+                <option>Low</option><option>Medium</option><option>High</option><option>Critical</option>
+              </select>
+              <small class="field-error" data-error-for="demand-urgency"></small>
+            </label>
+
+            <label class="demand-field full-width" for="demand-location">Location / receiving area <span>*</span>
+              <input id="demand-location" name="location" type="text" maxlength="160" placeholder="Address, shelter name, or neighborhood" required />
+              <small class="field-error" data-error-for="demand-location"></small>
+            </label>
+
+            <label class="demand-field full-width" for="demand-deadline">Required receiving time / deadline <span>*</span>
+              <input id="demand-deadline" name="deadline" type="datetime-local" required />
+              <small class="field-error" data-error-for="demand-deadline"></small>
+            </label>
+
+            <label class="demand-field full-width" for="demand-reason">Emergency reason <span>*</span>
+              <textarea id="demand-reason" name="reason" rows="4" maxlength="500" placeholder="Tell suppliers and riders why this request is urgent and who it will support." required></textarea>
+              <small class="field-error" data-error-for="demand-reason"></small>
+            </label>
+          </div>
+
+          <div class="demand-form-feedback" id="demand-form-feedback" role="status" aria-live="polite"></div>
+          <div class="demand-form-actions"><button class="button button-ghost" id="cancel-demand-alert" type="button">Cancel</button><button class="button button-primary" id="submit-demand-alert" type="submit"><span id="submit-demand-label">Create demand alert</span><span>↗</span></button></div>
+        </form>
+      </section>
+    </div>
+
+    <!-- Intake Window & Capacity Update Modal -->
+    <div class="demand-modal-backdrop" id="intake-modal" hidden>
+      <section class="demand-modal" role="dialog" aria-modal="true" aria-labelledby="intake-modal-title">
+        <button class="demand-modal-close" id="close-intake-modal" type="button" aria-label="Close intake modal">×</button>
+        <div class="eyebrow eyebrow-dark">Receiver workspace · Capacity &amp; Intake</div>
+        <h2 id="intake-modal-title">Update intake<br /><em>window.</em></h2>
+        <p class="demand-modal-intro">Keep suppliers and incoming riders updated on your receiving capacity and intake constraints.</p>
+
+        <form id="intake-form" novalidate>
+          <div class="demand-form-grid">
+            <label class="demand-field" for="intake-capacity-input">Remaining Intake Capacity <span>*</span>
+              <input id="intake-capacity-input" name="intakeCapacity" type="number" min="0" step="1" required />
+              <small class="field-error" data-error-for="intake-capacity-input"></small>
+            </label>
+
+            <label class="demand-field" for="intake-status-select">Shelter Operating Status <span>*</span>
+              <select id="intake-status-select" name="status" required>
+                <option value="Intake Open">Intake Open</option>
+                <option value="Intake Full / Divert Requests">Intake Full / Divert Requests</option>
+                <option value="Shelter Closed">Shelter Closed</option>
+              </select>
+              <small class="field-error" data-error-for="intake-status-select"></small>
+            </label>
+
+            <label class="demand-field full-width" for="intake-window-input">Receiving Window <span>*</span>
+              <input id="intake-window-input" name="intakeWindow" type="text" placeholder="e.g. 6:45–7:30 PM" required />
+              <small class="field-error" data-error-for="intake-window-input"></small>
+            </label>
+
+            <label class="demand-field full-width" for="intake-entrance-input">Receiving Entrance / Location Note
+              <input id="intake-entrance-input" name="entrance" type="text" placeholder="e.g. South entrance · 4 volunteers ready" />
+            </label>
+          </div>
+
+          <div class="demand-form-feedback" id="intake-form-feedback" role="status" aria-live="polite"></div>
+          <div class="demand-form-actions">
+            <button class="button button-ghost" id="cancel-intake-modal" type="button">Cancel</button>
+            <button class="button button-primary" id="submit-intake-btn" type="submit"><span>Save intake settings</span><span>↗</span></button>
+          </div>
+        </form>
+      </section>
+    </div>
+
+    <div class="toast" id="demand-toast" role="status" aria-live="polite"></div>
+    <script src="relay-store.js"></script>
+    <script src="receiver.js"></script>
+  </body>
+</html>

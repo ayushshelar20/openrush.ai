@@ -1,1 +1,209 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Supplier dashboard | Relay</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="dashboards.css"></head><body class="dashboard-page"><header class="dashboard-topbar"><a class="brand" href="index.html"><span class="brand-mark">↗</span><span>relay<span class="brand-dot">.</span></span></a><nav><a class="active" href="supplier.html">Supplier view</a><a href="rider.html">Rider view</a><a href="receiver.html">Receiver view</a></nav><div class="user-pill"><span class="avatar">JK</span> Juniper Kitchen</div></header><main class="dashboard-page-main"><div class="dashboard-page-heading"><div><div class="eyebrow eyebrow-dark">Supplier workspace · Live</div><h1>Good evening,<br><em>Juniper Kitchen.</em></h1></div><p>Offer safe surplus with a clear pickup window. Relay will surface compatible shelter needs and available riders.</p></div><div class="role-dashboard-grid"><div class="role-metric-card"><span>Available to offer</span><strong>42</strong><small>meal portions</small></div><div class="role-metric-card"><span>Open matches</span><strong>03</strong><small>2 need action</small></div><div class="role-metric-card"><span>Pickup success</span><strong>98%</strong><small>this month</small></div></div><div class="role-dashboard-layout"><section class="role-dashboard-panel"><span class="panel-caption">COMPATIBLE DEMAND NEARBY</span><h2>Needs that fit your kitchen</h2><div class="status-banner"><span></span> Your kitchen profile is compatible with 4 active requests</div><div class="queue-item"><div><b>Harbor Shelter</b><small>120 vegetarian meals · needed by 7:30 PM · 1.8 mi</small></div><span class="queue-badge alert">HIGH FIT ↗</span></div><div class="queue-item"><div><b>Northside Mutual Aid</b><small>40 nut-free meal kits · needed by 8:00 PM · 2.4 mi</small></div><span class="queue-badge">GOOD FIT ↗</span></div><div class="queue-item"><div><b>Eastgate Community Room</b><small>25 meal portions · needed by 9:00 PM · 3.1 mi</small></div><span class="queue-badge">GOOD FIT ↗</span></div></section><aside class="role-dashboard-panel"><span class="panel-caption">YOUR OPERATING PROFILE</span><h2>Safety constraints</h2><ul class="constraint-list"><li>Hot-hold packaging available</li><li>Vegetarian + nut-free supported</li><li>Pickup access: loading dock B</li><li>Next kitchen check-in: 18 min</li></ul><button class="button button-primary dashboard-action" style="margin-top:22px;width:100%">Post surplus offer <span>↗</span></button></aside></div><div class="role-dashboard-footer"><span>Last sync: just now · All systems operational</span><a href="index.html">← Back to Relay overview</a></div></main></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Supplier dashboard | Relay</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="dashboards.css" />
+  </head>
+  <body class="dashboard-page">
+    <header class="dashboard-topbar">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">↗</span>
+        <span>relay<span class="brand-dot">.</span></span>
+      </a>
+      <nav>
+        <a class="active" href="supplier.html">Supplier view</a>
+        <a href="rider.html">Rider view</a>
+        <a href="receiver.html">Receiver view</a>
+      </nav>
+      <div class="user-pill"><span class="avatar">JK</span> Juniper Kitchen</div>
+    </header>
+
+    <main class="dashboard-page-main">
+      <div class="dashboard-page-heading">
+        <div>
+          <div class="eyebrow eyebrow-dark">Supplier workspace · Live</div>
+          <h1>Good evening,<br /><em>Juniper Kitchen.</em></h1>
+        </div>
+        <p>Offer safe surplus with a clear pickup window. Relay will surface compatible shelter needs and available riders.</p>
+      </div>
+
+      <div class="role-dashboard-grid">
+        <div class="role-metric-card">
+          <span>Available to offer</span>
+          <strong id="supplier-available-offer">42</strong>
+          <small id="supplier-available-unit">meal portions</small>
+        </div>
+        <div class="role-metric-card">
+          <span>Open matches</span>
+          <strong id="supplier-open-matches">03</strong>
+          <small id="supplier-action-needed">2 need action</small>
+        </div>
+        <div class="role-metric-card">
+          <span>Pickup success</span>
+          <strong id="supplier-pickup-success">98%</strong>
+          <small>this month</small>
+        </div>
+      </div>
+
+      <div class="role-dashboard-layout">
+        <section class="role-dashboard-panel">
+          <span class="panel-caption">COMPATIBLE DEMAND NEARBY</span>
+          <h2>Needs that fit your kitchen</h2>
+          <div class="status-banner" id="supplier-status-banner">
+            <span></span> Your kitchen profile is compatible with 4 active requests
+          </div>
+          <div id="supplier-demand-list"></div>
+        </section>
+
+        <aside class="role-dashboard-panel">
+          <span class="panel-caption">YOUR OPERATING PROFILE</span>
+          <h2>Surplus &amp; safety profile</h2>
+          <ul class="constraint-list" id="supplier-constraint-list">
+            <li>Hot-hold packaging available</li>
+            <li>Vegetarian + nut-free supported</li>
+            <li id="supplier-pickup-dock">Pickup access: loading dock B</li>
+            <li>Next kitchen check-in: 18 min</li>
+          </ul>
+
+          <div style="margin-top:20px;">
+            <span class="panel-caption">ACTIVE SURPLUS INVENTORY</span>
+            <div id="supplier-surplus-list" style="margin-top:8px;"></div>
+          </div>
+
+          <button class="button button-primary dashboard-action" id="post-surplus-btn" type="button" style="margin-top:22px;width:100%">
+            Post surplus offer <span>↗</span>
+          </button>
+        </aside>
+      </div>
+
+      <div class="role-dashboard-footer">
+        <span id="supplier-footer-status">Last sync: just now · All systems operational</span>
+        <a href="index.html">← Back to Relay overview</a>
+      </div>
+    </main>
+
+    <!-- Post Surplus Offer Modal -->
+    <div class="demand-modal-backdrop" id="surplus-modal" hidden>
+      <section class="demand-modal" role="dialog" aria-modal="true" aria-labelledby="surplus-modal-title">
+        <button class="demand-modal-close" id="close-surplus-modal" type="button" aria-label="Close surplus form">×</button>
+        <div class="eyebrow eyebrow-dark">Supplier workspace · Surplus donation</div>
+        <h2 id="surplus-modal-title">Post surplus<br /><em>offer.</em></h2>
+        <p class="demand-modal-intro">Specify available portion quantity, safe-use window, and packaging details for quick dispatch to shelters.</p>
+
+        <form id="surplus-form" novalidate>
+          <div class="demand-form-grid">
+            <label class="demand-field full-width" for="surplus-category">Surplus Category <span>*</span>
+              <select id="surplus-category" name="category" required>
+                <option value="">Select a category</option>
+                <option value="Cooked Meals">Cooked Meals (Prepared)</option>
+                <option value="Raw Rations">Raw Rations / Pantry</option>
+                <option value="Drinking Water">Drinking Water</option>
+                <option value="Medical Supplies">Medical Supplies</option>
+                <option value="Infant Essentials">Infant Essentials</option>
+                <option value="Clothing &amp; Blankets">Clothing &amp; Blankets</option>
+                <option value="Hygiene Kits">Hygiene Kits</option>
+                <option value="Other">Other</option>
+              </select>
+              <small class="field-error" data-error-for="surplus-category"></small>
+            </label>
+
+            <label class="demand-field full-width" id="custom-surplus-category-field" for="custom-surplus-category" hidden>Custom Category Name <span>*</span>
+              <input id="custom-surplus-category" name="customCategory" type="text" placeholder="e.g. Fresh Bakery Loaves" />
+              <small class="field-error" data-error-for="custom-surplus-category"></small>
+            </label>
+
+            <label class="demand-field" for="surplus-quantity">Available Quantity (Units/Portions) <span>*</span>
+              <input id="surplus-quantity" name="quantity" type="number" min="1" step="1" inputmode="numeric" placeholder="e.g. 42" required />
+              <small class="field-error" data-error-for="surplus-quantity"></small>
+            </label>
+
+            <label class="demand-field" for="surplus-expiry">Safe-use / Expiry Deadline <span>*</span>
+              <input id="surplus-expiry" name="expiryDeadline" type="datetime-local" required />
+              <small class="field-error" data-error-for="surplus-expiry"></small>
+            </label>
+
+            <label class="demand-field full-width" for="surplus-location">Pickup Location &amp; Access <span>*</span>
+              <input id="surplus-location" name="location" type="text" placeholder="e.g. Juniper Kitchen · Loading dock B" required />
+              <small class="field-error" data-error-for="surplus-location"></small>
+            </label>
+
+            <label class="demand-field full-width" for="surplus-handling">Handling &amp; Packaging Requirements <span>*</span>
+              <input id="surplus-handling" name="handlingRequirements" type="text" placeholder="e.g. Hot-hold packaging · Vegetarian + nut-free supported" required />
+              <small class="field-error" data-error-for="surplus-handling"></small>
+            </label>
+          </div>
+
+          <div class="demand-form-feedback" id="surplus-form-feedback" role="status" aria-live="polite"></div>
+          <div class="demand-form-actions">
+            <button class="button button-ghost" id="cancel-surplus-modal" type="button">Cancel</button>
+            <button class="button button-primary" id="submit-surplus-btn" type="submit">
+              <span id="submit-surplus-label">Post surplus offer</span><span>↗</span>
+            </button>
+          </div>
+        </form>
+      </section>
+    </div>
+
+    <!-- Accept / Dispatch Request Modal -->
+    <div class="demand-modal-backdrop" id="dispatch-modal" hidden>
+      <section class="demand-modal" role="dialog" aria-modal="true" aria-labelledby="dispatch-modal-title">
+        <button class="demand-modal-close" id="close-dispatch-modal" type="button" aria-label="Close dispatch modal">×</button>
+        <div class="eyebrow eyebrow-dark">Matching engine · Dispatch &amp; Reservation</div>
+        <h2 id="dispatch-modal-title">Accept &amp; dispatch<br /><em>request.</em></h2>
+        <p class="demand-modal-intro">Pair your available surplus with this shelter demand and dispatch an eligible volunteer rider.</p>
+
+        <form id="dispatch-form" novalidate>
+          <div class="dispatch-detail-box" id="dispatch-demand-summary">
+            <!-- Dynamic demand info populated by JS -->
+          </div>
+
+          <div class="demand-form-grid">
+            <label class="demand-field full-width" for="dispatch-offer-select">Select Available Surplus Inventory <span>*</span>
+              <select id="dispatch-offer-select" name="offerId" required>
+                <!-- Populated dynamically -->
+              </select>
+              <small class="field-error" data-error-for="dispatch-offer-select"></small>
+            </label>
+
+            <label class="demand-field" for="dispatch-quantity-input">Quantity to Allocate <span>*</span>
+              <input id="dispatch-quantity-input" name="quantity" type="number" min="1" step="1" required />
+              <small class="field-error" data-error-for="dispatch-quantity-input"></small>
+            </label>
+
+            <label class="demand-field" for="dispatch-rider-select">Assign Volunteer Rider <span>*</span>
+              <select id="dispatch-rider-select" name="riderId" required>
+                <!-- Populated dynamically -->
+              </select>
+              <small class="field-error" data-error-for="dispatch-rider-select"></small>
+            </label>
+          </div>
+
+          <div class="dispatch-detail-box" id="dispatch-constraint-check" style="margin-top:16px;">
+            <!-- Live feasibility check -->
+          </div>
+
+          <div class="demand-form-feedback" id="dispatch-form-feedback" role="status" aria-live="polite"></div>
+          <div class="demand-form-actions">
+            <button class="button button-ghost" id="cancel-dispatch-modal" type="button">Cancel</button>
+            <button class="button button-primary" id="submit-dispatch-btn" type="submit">
+              <span id="submit-dispatch-label">Confirm &amp; dispatch assignment</span><span>↗</span>
+            </button>
+          </div>
+        </form>
+      </section>
+    </div>
+
+    <div class="toast" id="supplier-toast" role="status" aria-live="polite"></div>
+    <script src="relay-store.js"></script>
+    <script src="supplier.js"></script>
+  </body>
+</html>

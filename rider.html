@@ -1,1 +1,148 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Rider dashboard | Relay</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="dashboards.css"></head><body class="dashboard-page"><header class="dashboard-topbar"><a class="brand" href="index.html"><span class="brand-mark">↗</span><span>relay<span class="brand-dot">.</span></span></a><nav><a href="supplier.html">Supplier view</a><a class="active" href="rider.html">Rider view</a><a href="receiver.html">Receiver view</a></nav><div class="user-pill"><span class="avatar">JR</span> Jordan Reed</div></header><main class="dashboard-page-main"><div class="dashboard-page-heading"><div><div class="eyebrow eyebrow-dark">Rider workspace · Available</div><h1>Your next safe<br><em>handoff is ready.</em></h1></div><p>Relay only shows routes that fit your vehicle capacity, location, and active availability window.</p></div><div class="role-dashboard-grid"><div class="role-metric-card"><span>Current capacity</span><strong>08</strong><small>meal units free</small></div><div class="role-metric-card"><span>Suggested route</span><strong>6m</strong><small>to pickup</small></div><div class="role-metric-card"><span>Handoffs completed</span><strong>27</strong><small>this month</small></div></div><div class="role-dashboard-layout"><section class="role-dashboard-panel"><span class="panel-caption">ROUTE OFFER · EXPIRES IN 04:16</span><h2>Juniper Kitchen → Harbor Shelter</h2><div class="status-banner"><span></span> Best fit: your capacity and route match this demand</div><div class="queue-item"><div><b>Pickup</b><small>Juniper Kitchen · Loading dock B<br>Ready now · 0.8 mi away</small></div><span class="queue-badge">6 MIN</span></div><div class="queue-item"><div><b>Drop-off</b><small>Harbor Shelter · South entrance<br>Intake closes 7:30 PM · 1.8 mi</small></div><span class="queue-badge">14 MIN</span></div><button class="button button-primary dashboard-action" style="margin-top:20px;width:100%">Accept route <span>↗</span></button></section><aside class="role-dashboard-panel"><span class="panel-caption">YOUR CHECK-IN</span><h2>Vehicle + availability</h2><ul class="constraint-list"><li>Bike trailer · 12 meal units</li><li>Insulated carrier confirmed</li><li>Available until 8:15 PM</li><li>Last location check-in: 2 min ago</li></ul><button class="button button-ghost dashboard-action" style="margin-top:22px;width:100%">Update availability</button></aside></div><div class="role-dashboard-footer"><span>Safety reminder: confirm pickup and drop-off in the app</span><a href="index.html">← Back to Relay overview</a></div></main></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rider dashboard | Relay</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="dashboards.css" />
+  </head>
+  <body class="dashboard-page">
+    <header class="dashboard-topbar">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">↗</span>
+        <span>relay<span class="brand-dot">.</span></span>
+      </a>
+      <nav>
+        <a href="supplier.html">Supplier view</a>
+        <a class="active" href="rider.html">Rider view</a>
+        <a href="receiver.html">Receiver view</a>
+      </nav>
+      <div class="user-pill"><span class="avatar" id="rider-avatar">JR</span> <span id="rider-header-name">Jordan Reed</span></div>
+    </header>
+
+    <main class="dashboard-page-main">
+      <div class="dashboard-page-heading">
+        <div>
+          <div class="eyebrow eyebrow-dark" id="rider-workspace-eyebrow">Rider workspace · Available</div>
+          <h1>Your next safe<br /><em>handoff is ready.</em></h1>
+        </div>
+        <p>Relay only shows routes that fit your vehicle capacity, location, and active availability window.</p>
+      </div>
+
+      <div class="role-dashboard-grid">
+        <div class="role-metric-card">
+          <span>Current capacity</span>
+          <strong id="rider-current-capacity">08</strong>
+          <small id="rider-capacity-unit">meal units free</small>
+        </div>
+        <div class="role-metric-card">
+          <span>Suggested route</span>
+          <strong id="rider-suggested-route">6m</strong>
+          <small id="rider-route-sub">to pickup</small>
+        </div>
+        <div class="role-metric-card">
+          <span>Handoffs completed</span>
+          <strong id="rider-handoffs-completed">27</strong>
+          <small>this month</small>
+        </div>
+      </div>
+
+      <div class="role-dashboard-layout">
+        <section class="role-dashboard-panel">
+          <span class="panel-caption" id="route-panel-caption">ROUTE OFFER · ACTIVE</span>
+          <h2 id="route-heading">Juniper Kitchen → Harbor Shelter</h2>
+          <div class="status-banner" id="rider-status-banner">
+            <span></span> Best fit: your capacity and route match this demand
+          </div>
+
+          <div id="rider-recalculation-notice"></div>
+          <div id="rider-route-details"></div>
+          <div id="rider-route-actions" style="margin-top:20px;"></div>
+        </section>
+
+        <aside class="role-dashboard-panel">
+          <span class="panel-caption">YOUR CHECK-IN</span>
+          <h2>Vehicle + availability</h2>
+          <ul class="constraint-list" id="rider-constraint-list">
+            <li id="rider-info-vehicle">Bike trailer · 12 meal units</li>
+            <li id="rider-info-carrier">Insulated carrier confirmed</li>
+            <li id="rider-info-window">Available until 8:15 PM</li>
+            <li id="rider-info-checkin">Last location check-in: 2 min ago</li>
+          </ul>
+
+          <button class="button button-ghost dashboard-action" id="update-availability-btn" type="button" style="margin-top:22px;width:100%">
+            Update availability
+          </button>
+        </aside>
+      </div>
+
+      <div class="role-dashboard-footer">
+        <span id="rider-footer-status">Safety reminder: confirm pickup and drop-off in the app</span>
+        <a href="index.html">← Back to Relay overview</a>
+      </div>
+    </main>
+
+    <!-- Update Availability Modal -->
+    <div class="demand-modal-backdrop" id="availability-modal" hidden>
+      <section class="demand-modal" role="dialog" aria-modal="true" aria-labelledby="availability-modal-title">
+        <button class="demand-modal-close" id="close-availability-modal" type="button" aria-label="Close availability modal">×</button>
+        <div class="eyebrow eyebrow-dark">Volunteer rider · Shift &amp; Capacity</div>
+        <h2 id="availability-modal-title">Update<br /><em>availability.</em></h2>
+        <p class="demand-modal-intro">Set your active transport capacity and shift hours so suppliers can route feasible aid packages to you.</p>
+
+        <form id="availability-form" novalidate>
+          <div class="demand-form-grid">
+            <label class="demand-field" for="avail-capacity-input">Vehicle Cargo Capacity (Units) <span>*</span>
+              <input id="avail-capacity-input" name="capacityUnits" type="number" min="1" step="1" required />
+              <small class="field-error" data-error-for="avail-capacity-input"></small>
+            </label>
+
+            <label class="demand-field" for="avail-status-select">Availability Status <span>*</span>
+              <select id="avail-status-select" name="availabilityStatus" required>
+                <option value="Available">Available (Accepting Routes)</option>
+                <option value="Busy">Busy (On Active Route)</option>
+                <option value="Offline">Offline (End Shift)</option>
+              </select>
+              <small class="field-error" data-error-for="avail-status-select"></small>
+            </label>
+
+            <label class="demand-field" for="avail-until-input">Available Until (Time) <span>*</span>
+              <input id="avail-until-input" name="availableUntil" type="time" required />
+              <small class="field-error" data-error-for="avail-until-input"></small>
+            </label>
+
+            <label class="demand-field" for="avail-vehicle-select">Vehicle Type <span>*</span>
+              <select id="avail-vehicle-select" name="vehicleType" required>
+                <option value="Bike trailer">Bicycle with Trailer</option>
+                <option value="Cargo Bike">Cargo E-Bike</option>
+                <option value="Car">Passenger Car / Trunk</option>
+                <option value="Cargo Van">Cargo Van</option>
+                <option value="On Foot">On Foot / Rolling Carrier</option>
+              </select>
+              <small class="field-error" data-error-for="avail-vehicle-select"></small>
+            </label>
+          </div>
+
+          <div class="demand-form-feedback" id="availability-form-feedback" role="status" aria-live="polite"></div>
+          <div class="demand-form-actions">
+            <button class="button button-ghost" id="cancel-availability-modal" type="button">Cancel</button>
+            <button class="button button-primary" id="submit-availability-btn" type="submit">
+              <span id="submit-availability-label">Save availability</span><span>↗</span>
+            </button>
+          </div>
+        </form>
+      </section>
+    </div>
+
+    <div class="toast" id="rider-toast" role="status" aria-live="polite"></div>
+    <script src="relay-store.js"></script>
+    <script src="rider.js"></script>
+  </body>
+</html>
